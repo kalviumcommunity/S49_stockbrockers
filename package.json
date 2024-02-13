@@ -1,0 +1,11 @@
+{
+  "name": "s49_stockbrockers",
+  "version": "1.0.0",
+  "description": "topic - list of best stock brockers- the people or companies that help you buy and sell stocks. at this moment 2024, there are many stock brokers, and it's very important to pick the best. The guide which will be developed will explain why it's important to choose wisely.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
