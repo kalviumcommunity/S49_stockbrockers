@@ -10,7 +10,7 @@ let data = [
 
 // CRUD operations
 router.post('/create', (req, res) => {
-    const newItem = req.body; // assuming the body contains the new item to be added
+    const newItem = req.body; 
     newItem.id = data.length + 1;
     data.push(newItem);
     res.json(newItem);
@@ -22,7 +22,7 @@ router.get('/read', (req, res) => {
 
 router.put('/update/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const updateItem = req.body; // assuming the body contains the updated item
+    const updateItem = req.body; 
     const index = data.findIndex(item => item.id === id);
     if (index !== -1) {
         data[index] = { ...data[index], ...updateItem };
