@@ -125,13 +125,6 @@ const Data = () => {
             "customercare": "24/7"
           }
           
-          
-          
-                    
-          
-          
-          
-          
     ];
 
     return (
