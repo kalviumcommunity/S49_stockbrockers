@@ -19,6 +19,7 @@ function UserProfile({ isOpen, closeModal }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData)
     try {
       // Send the form data to the specified API endpoint
       const Response = await axios.post('http://localhost:3000/postUserData', formData);
@@ -29,7 +30,8 @@ function UserProfile({ isOpen, closeModal }) {
       const userDataResponse = await axios.get('http://localhost:3000/getUserData');
       console.log('User data:', userDataResponse.data);
     } catch (error) {
-      console.error('Error saving user profile:', error);
+      alert(error.response.data.message)
+       console.log(error.response.data.message,"zx")
     }
   };
   
