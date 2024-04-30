@@ -20,6 +20,7 @@ router.get('/read', (req, res) => {
     res.json(data);
 });
 
+
 router.put('/update/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const updateItem = req.body; 

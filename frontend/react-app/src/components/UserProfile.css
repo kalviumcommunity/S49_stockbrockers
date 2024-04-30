@@ -5,13 +5,14 @@
   }
   
   .user-profile-form {
-    background-color: #222;
-    color: #fff;
-    padding: 20px 20px 20px 20px;
-    border-radius: 8px;
-    width: 300px;
-    margin-left:450px;
-    margin-top: 130px;
+    background-color: #00f7ff;
+    color: #030101;
+    padding: 40px 70px 60px 70px;
+    border-radius: 27px;
+    width: 40vh;
+    margin-left:37vw;
+    margin-top: 10vh;
+    border: 3px solid green;
   }
   
   .user-profile-form label {
@@ -22,16 +23,16 @@
   .user-profile-form input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #030600;
   }
   
   .user-profile-form button {
-    width: 100%;
-    padding: 10px 0;
+    width: 20vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #4CAF50;
     border-color: white;
     color: white;
@@ -39,7 +40,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
   }
   
   .user-profile-form button[type="submit"] {

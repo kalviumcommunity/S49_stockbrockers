@@ -24,14 +24,14 @@ const updateStockbrokerSchema = Joi.object({
   // Add more fields and validations as needed
 });
 
-// Middleware for validating PUT request to update a stockbroker
-function validateUpdateStockbroker(req, res, next) {
-  const { error } = updateStockbrokerSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message });
-  }
-  next();
-}
+// // Middleware for validating PUT request to update a stockbroker
+// function validateUpdateStockbroker(req, res, next) {
+//   const { error } = updateStockbrokerSchema.validate(req.body);
+//   if (error) {
+//     return res.status(400).json({ error: error.details[0].message });
+//   }
+//   next();
+// }
 
 // Middleware for parsing request bodies
 app.use(bodyParser.json());
@@ -57,16 +57,7 @@ app.get('/ping', (req, res) => {
 });
 
 // Route to fetch stockbrokers
-app.get(`/getStockbrocker`, async (req, res) => {
-  try {
-    const x = await StockbrockerModel.find();
-    res.json(x);
-  
-  } catch (error) {
-    console.error('Error fetching stockbrockers:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+
 
 const schema = Joi.object({
   name:Joi.string().required(),
@@ -102,7 +93,7 @@ app.post('/postUserData', async (req,res) =>{
 })
 
 // Route to update a stockbroker
-app.put('/updateStockbroker/:id', validateUpdateStockbroker, async (req, res) => {
+app.put('/updateStockbroker/:id', async (req, res) => {
   const id = req.params.id;
   const updatedBrokerData = req.body; // Assuming the updated data is sent in the request body
   try {
@@ -114,6 +105,20 @@ app.put('/updateStockbroker/:id', validateUpdateStockbroker, async (req, res) =>
   } catch (error) {
     console.error('Error updating stockbroker:', error);
     res.status(500).json({ error: 'Internal Server Error' })
+  }                     
+});
+
+app.delete('/deleteStockbroker/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedStockbroker = await StockbrockerModel.findByIdAndDelete(id);
+    if (!deletedStockbroker) {
+      return res.status(404).json({ error: 'Stockbroker not found' });
+    }
+    res.json({ message: 'Stockbroker deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting stockbroker:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
