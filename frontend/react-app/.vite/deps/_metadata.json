@@ -1,0 +1,43 @@
+{
+  "hash": "676b10d4",
+  "configHash": "7656f5ea",
+  "lockfileHash": "5e094e4a",
+  "browserHash": "a6b73b8c",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e03726e2",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "f57cb184",
+      "needsInterop": true
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "375968e9",
+      "needsInterop": false
+    },
+    "react-modal": {
+      "src": "../../node_modules/react-modal/lib/index.js",
+      "file": "react-modal.js",
+      "fileHash": "9e905543",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-W6V455R2": {
+      "file": "chunk-W6V455R2.js"
+    },
+    "chunk-2CB5NBFK": {
+      "file": "chunk-2CB5NBFK.js"
+    },
+    "chunk-NIBQISYW": {
+      "file": "chunk-NIBQISYW.js"
+    }
+  }
+}
