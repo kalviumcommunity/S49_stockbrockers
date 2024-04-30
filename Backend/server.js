@@ -57,16 +57,7 @@ app.get('/ping', (req, res) => {
 });
 
 // Route to fetch stockbrokers
-app.get(`/getStockbrocker`, async (req, res) => {
-  try {
-    const x = await StockbrockerModel.find();
-    res.json(x);
-  
-  } catch (error) {
-    console.error('Error fetching stockbrockers:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+
 
 const schema = Joi.object({
   name:Joi.string().required(),

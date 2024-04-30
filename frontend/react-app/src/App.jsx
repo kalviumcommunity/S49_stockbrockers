@@ -21,14 +21,6 @@ function App() {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/getStockbrocker');
-      setStockbrokers(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
   const handleUserProfileClick = () => {
     setSelectedBroker(null); // Reset selected broker
@@ -84,21 +76,7 @@ function App() {
           selectedBroker={selectedBroker} 
         />
 
-        <div className="stockbrokers-list">
-          {stockbrokers.map((broker, index) => (
-            <div key={broker._id} className="stockbroker">
-              <h2>{broker.brokername}</h2>
-              <p>Founded In: {broker.foundedin}</p>
-              <p>Account Opening Charge: {broker.accountopeningcharge}</p>
-              <p>Brokerage Charged for F&O: {broker.brocragechargedforfANDo}</p>
-              <p>Brokerage Charged for Stocks: {broker.brocragechargedforstocks}</p>
-              <p>Account Maintenance Charge: {broker.accountmaintanencecharge}</p>
-              <p>Customer Care: {broker.customercare}</p>
-              <button onClick={() => handleDelete(broker._id)}>Delete</button>
-              <button onClick={() => handleUpdateClick(broker)}>Update</button>
-            </div>
-          ))}
-        </div>
+       
       </div>
       
       {/* Update form */}
