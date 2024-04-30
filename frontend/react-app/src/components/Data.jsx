@@ -124,16 +124,7 @@ const Data = () => {
             "accountmaintanencecharge": "₹0",
             "customercare": "24/7"
           }
-          
-          
-          
-                    
-          
-          
-          
-          
     ];
-
     return (
         <div className="container">
             {data.map((entry) => (
@@ -150,5 +141,4 @@ const Data = () => {
         </div>
     );
 }
-
 export default Data;
