@@ -95,6 +95,10 @@ function App() {
               <p>Account Maintenance Charge: {broker.accountmaintanencecharge}</p>
               <p>Customer Care: {broker.customercare}</p>
               <button onClick={() => handleDelete(broker._id)}>Delete</button>
+
+
+
+              
               <button onClick={() => handleUpdateClick(broker)}>Update</button>
             </div>
           ))}
