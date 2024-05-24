@@ -5,7 +5,7 @@ import "./UserProfile.css";
 
 Modal.setAppElement('#root');
 
-function UserProfile({ isOpen, closeModal, selectedBroker, onUpdateSubmit }) {
+function UserProfile({ isOpen, closeModal }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,20 +13,24 @@ function UserProfile({ isOpen, closeModal, selectedBroker, onUpdateSubmit }) {
   });
 
   useEffect(() => {
-    if (selectedBroker) {
-      setFormData({
-        name: selectedBroker.name || '',
-        email: selectedBroker.email || '',
-        password: selectedBroker.password || ''
-      });
-    } else {
-      setFormData({
-        name: '',
-        email: '',
-        password: ''
-      });
+    // Fetch user data when the component is mounted
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/getUserData');
+        setFormData({
+          name: response.data.name || '',
+          email: response.data.email || '',
+          password: '' // Do not pre-fill password for security reasons
+        });
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    if (isOpen) {
+      fetchUserData();
     }
-  }, [selectedBroker]);
+  }, [isOpen]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,60 +38,35 @@ function UserProfile({ isOpen, closeModal, selectedBroker, onUpdateSubmit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
     try {
-      // Send the form data to the specified API endpoint
       const response = await axios.post('http://localhost:3000/postUserData', formData);
       alert('User profile saved successfully!');
       closeModal();
-
-      // Fetch the user data after saving
-      const userDataResponse = await axios.get('http://localhost:3000/getUserData');
-      console.log('User data:', userDataResponse.data);
     } catch (error) {
-      alert(error.response.data.message)
-      console.log(error.response.data.message,"zx")
+      console.error('Error saving user profile:', error.response ? error.response.data : error.message);
+      alert('Error saving user profile: ' + (error.response ? error.response.data.message : error.message));
     }
   };
 
-  
-  const handleUpdateSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(`http://localhost:3000/updateStockbroker/${selectedBroker._id}`, formData);
-      if (response.status === 200) {
-        alert('Stockbroker updated successfully!');
-        closeModal();
-      } else {
-        console.error('Unexpected status code:', response.status);
-      }
-    } catch (error) {
-      console.error('Error updating stockbroker:', error);
-    }
-  };
   return (
-    <div>
-
-      {/* User Profile Modal */}
-      <Modal
-        className="user-profile-form"
-        isOpen={isOpen === 'user'}
-        onRequestClose={closeModal}
-        contentLabel="User Profile Modal"
-      >
-        <h2>User Profile</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Name:</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-          <label>Email:</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-          <label>Password:</label>
-          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-          <button type="submit">Save Profile</button>
-          <button type="button" onClick={() => closeModal()}>Close</button>
-        </form>
-      </Modal>
-    </div>
+    <Modal
+      className="user-profile-form"
+      isOpen={isOpen}
+      onRequestClose={closeModal}
+      contentLabel="User Profile Modal"
+    >
+      <h2>User Profile</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Name:</label>
+        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+        <label>Email:</label>
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <label>Password:</label>
+        <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+        <button type="submit">Save Profile</button>
+        <button type="button" onClick={closeModal}>Close</button>
+      </form>
+    </Modal>
   );
 }
 
