@@ -1,5 +1,4 @@
-/* Update form CSS */
-.update-form {
+/* Update form CSS */.update-form {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,10 +13,9 @@
 }
 
 .update-form.active {
-  display: block; /* Display the form when active */
+  display: block; 
 }
 
-/* Style for form inputs */
 .update-form input[type="text"],
 .update-form input[type="number"],
 .update-form textarea {
@@ -28,7 +26,7 @@
   border-radius: 5px;
 }
 
-/* Style for buttons */
+
 .update-form button {
   background-color: #4CAF50;
   color: white;
@@ -51,27 +49,26 @@
   background-color: #d32f2f;
 }
 
-/* Style for form headings */
+
 .update-form h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Style for form labels */
+
 .update-form label {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
 }
 
-/* Style for form container */
+
 .update-form .form-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-/* Style for individual data boxes */
 .update-form .data-box {
   background-color: #f2f2f2;
   padding: 15px;
@@ -79,11 +76,10 @@
 }
 
 
-/* CSS for stockbroker items */
 .stockbrokers-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns */
-  gap: 20px; /* Gap between items */
+  gap: 20px;
 }
 
 .stockbroker {
@@ -93,7 +89,6 @@
   background-color: #b1f1f6;
 }
 
-/* Adjust styles for buttons */
 .stockbroker button {
   margin-top: 10px;
 }

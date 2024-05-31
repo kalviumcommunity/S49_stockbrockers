@@ -16,6 +16,7 @@ function App() {
     accountmaintanencecharge: '',
     customercare: ''
   });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -60,7 +61,8 @@ function App() {
     setUpdateFormData({ ...updateFormData, [name]: value });
   };
 
-  const handleUpdateSubmit = async () => {
+  const handleUpdateSubmit = async (event) => {
+    event.preventDefault();
     try {
       await axios.put(`http://localhost:3000/updateStockbroker/${selectedBroker._id}`, updateFormData);
       alert('Stockbroker updated successfully!');
@@ -71,17 +73,42 @@ function App() {
     }
   };
 
+  const handleLogin = async (email, password) => {
+    try {
+      const response = await axios.post('http://localhost:3000/auth/login', { email, password });
+      if (response.data.message === 'Login successful') {
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:3000/auth/logout');
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <>
       <div>
         <nav>
           <h1>Welcome to stockbrokers</h1>
-          <button onClick={handleUserProfileClick}>User Profile</button>
+          {isAuthenticated ? (
+            <button onClick={handleLogout}>Logout</button>
+          ) : (
+            <button onClick={handleUserProfileClick}>User Profile</button>
+          )}
         </nav>
         <UserProfile 
           isOpen={isOpen === 'user'} 
           closeModal={closeModal} 
-          selectedBroker={selectedBroker} 
+          handleLogin={handleLogin}
+          isAuthenticated={isAuthenticated}
         />
 
         <div className="stockbrokers-list">
@@ -95,10 +122,6 @@ function App() {
               <p>Account Maintenance Charge: {broker.accountmaintanencecharge}</p>
               <p>Customer Care: {broker.customercare}</p>
               <button onClick={() => handleDelete(broker._id)}>Delete</button>
-
-
-
-              
               <button onClick={() => handleUpdateClick(broker)}>Update</button>
             </div>
           ))}
