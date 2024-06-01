@@ -24,14 +24,14 @@ const updateStockbrokerSchema = Joi.object({
   // Add more fields and validations as needed
 });
 
-// // Middleware for validating PUT request to update a stockbroker
-// function validateUpdateStockbroker(req, res, next) {
-//   const { error } = updateStockbrokerSchema.validate(req.body);
-//   if (error) {
-//     return res.status(400).json({ error: error.details[0].message });
-//   }
-//   next();
-// }
+// Middleware for validating PUT request to update a stockbroker
+function validateUpdateStockbroker(req, res, next) {
+  const { error } = updateStockbrokerSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
+  next();
+}
 
 // Middleware for parsing request bodies
 app.use(bodyParser.json());
