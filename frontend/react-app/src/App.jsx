@@ -127,8 +127,7 @@ function App() {
           ))}
         </div>
       </div>
-      
-      {/* Update form */}
+
       <div className={`update-form ${isOpen === 'update' ? 'active' : ''}`}>
         <h2>Update Broker: {selectedBroker && selectedBroker.brokername}</h2>
         <form onSubmit={handleUpdateSubmit}>
